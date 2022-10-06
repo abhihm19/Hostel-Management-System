@@ -27,8 +27,12 @@ public class StudentServiceImpl implements IStudentService {
 	private RoomRepository roomRepository;
 	private PaymentRepository paymentRepository;
 
-	public StudentServiceImpl(StudentRepository studentRepository, UserRepository userRepository,
-			RoomRepository roomRepository, PaymentRepository paymentRepository) {
+	public StudentServiceImpl(
+			StudentRepository studentRepository,
+			UserRepository userRepository,
+			RoomRepository roomRepository,
+			PaymentRepository paymentRepository
+			) {
 		this.studentRepository = studentRepository;
 		this.userRepository = userRepository;
 		this.roomRepository = roomRepository;

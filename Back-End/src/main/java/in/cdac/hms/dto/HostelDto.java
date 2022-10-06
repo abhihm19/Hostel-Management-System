@@ -10,14 +10,12 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class HostelDto {
-	
+public class HostelDto {	
 	private long id;
 	private String name;	
 	private String contactPerson;	
 	private long contactMobileNo;	
 	private String address;	
 	private int hostelFees;
-	private int totalRooms;
-	
+	private int totalRooms;	
 }

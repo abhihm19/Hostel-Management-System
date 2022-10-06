@@ -9,8 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class AdminDto {
-	
+public class AdminDto {	
 	private long id;
 	private String firstName;
 	private String lastName;	
@@ -20,5 +19,4 @@ public class AdminDto {
 	private String emailId;
 	private long mobileNo;	
 	private String designation;
-
 }

@@ -11,14 +11,12 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class PaymentDto {	
-	
+public class PaymentDto {		
 	private long id;
 	private String transactionId;
 	private String studentName;
 	private String hostelName;
 	private int roomNo;
 	private String transactionStatus;
-	private Date transactionDate;
-	
+	private Date transactionDate;	
 }

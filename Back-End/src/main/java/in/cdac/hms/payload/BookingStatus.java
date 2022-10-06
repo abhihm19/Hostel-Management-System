@@ -9,8 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class BookingStatus {
-	
+public class BookingStatus {	
 	private int roomId;
 	private String transactionId;
 }

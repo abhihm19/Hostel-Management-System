@@ -6,7 +6,4 @@ import in.cdac.hms.dto.PaymentDto;
 
 public interface IPaymentService {
 	List<PaymentDto> getTransactions();
-
-//	List<PaymentDto> displayPayments();
-	
 }

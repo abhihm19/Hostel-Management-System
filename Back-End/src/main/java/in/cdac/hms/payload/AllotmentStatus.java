@@ -9,8 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class AllotmentStatus {
-	
+public class AllotmentStatus {	
 	private int roomNo;
 	private String hostelName;
 	private String hostelAddress;
@@ -18,5 +17,4 @@ public class AllotmentStatus {
 	private long contactPhone;
 	private String allotmentStatus;
 	private String paymentStatus;
-
 }

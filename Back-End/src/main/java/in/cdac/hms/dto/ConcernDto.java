@@ -9,8 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ConcernDto {	
-	
+public class ConcernDto {		
 	private long id;
 	private String subject;
 	private String message;

@@ -3,7 +3,6 @@ package in.cdac.hms.service;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import in.cdac.hms.dto.HostelDto;
@@ -11,10 +10,14 @@ import in.cdac.hms.model.Hostel;
 import in.cdac.hms.repository.HostelRepository;
 
 @Service
-public class HostelServiceImpl implements IHostelService {
+public class HostelServiceImpl implements IHostelService {	
 	
-	@Autowired
-	private HostelRepository hostelRepository;
+	private HostelRepository hostelRepository;	
+
+	public HostelServiceImpl(HostelRepository hostelRepository) {
+		super();
+		this.hostelRepository = hostelRepository;
+	}
 
 	@Override
 	public void addHostel(HostelDto hostelDto) {

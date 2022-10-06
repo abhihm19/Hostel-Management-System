@@ -15,7 +15,6 @@ public class PaymentServiceImpl implements IPaymentService {
 	private PaymentRepository paymentRepository;	
 
 	public PaymentServiceImpl(PaymentRepository paymentRepository) {
-		super();
 		this.paymentRepository = paymentRepository;
 	}
 

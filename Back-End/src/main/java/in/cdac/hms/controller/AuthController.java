@@ -1,18 +1,13 @@
 package in.cdac.hms.controller;
 
 import java.net.URI;
-import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,23 +22,26 @@ import in.cdac.hms.payload.LoginRequest;
 import in.cdac.hms.payload.SignUpRequest;
 import in.cdac.hms.repository.UserRepository;
 import in.cdac.hms.security.JwtUtil;
-import in.cdac.hms.security.UserPrincipal;
 import in.cdac.hms.service.UserServiceImpl;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
 public class AuthController {   
 	
-	@Autowired
-	private JwtUtil jwtUtil;
-	@Autowired
-	private AuthenticationManager authenticationManager;
-   
 	
+	private JwtUtil jwtUtil;	
+	private AuthenticationManager authenticationManager; 	
     private UserServiceImpl userServiceImpl;	
-	private UserRepository userRepository; 	
-	
-	public AuthController(UserServiceImpl userServiceImpl, UserRepository userRepository) {
+	private UserRepository userRepository; 		
+
+	public AuthController(
+			JwtUtil jwtUtil,
+			AuthenticationManager authenticationManager,
+			UserServiceImpl userServiceImpl,
+			UserRepository userRepository
+			) {		
+		this.jwtUtil = jwtUtil;
+		this.authenticationManager = authenticationManager;
 		this.userServiceImpl = userServiceImpl;
 		this.userRepository = userRepository;
 	}
@@ -54,7 +52,7 @@ public class AuthController {
 		String jwt = null;
 		List<String> roleNames = null;
 		try {
-			Authentication authentication = authenticationManager.authenticate(
+			authenticationManager.authenticate(
 			        new UsernamePasswordAuthenticationToken(
 			                loginRequest.getUserName(),
 			                loginRequest.getPassword()
