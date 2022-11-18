@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import HostelService from "../services/HostelService";
+import { useNavigate } from 'react-router-dom';
+import HostelService from "../../services/HostelService";
 
 export default function UpdateHostel() {
 
@@ -7,25 +8,27 @@ export default function UpdateHostel() {
   console.log(hostel);
 
   const [hosteldetails, setHosteldetails] = useState(hostel);
+  const navigate = useNavigate();
 
   const update = (e) => {
     e.preventDefault();
 
     const formData = new FormData(e.target);
-    const hosteldetail = Object.fromEntries(formData);
+    const hostelDto = Object.fromEntries(formData);
 
-    console.log(hosteldetail);
+    console.log(hostelDto);
 
-    HostelService.updatedetail(hosteldetail).then(response => {
-      console.log("hostel details updated :" + response)
-      alert("hostel details updated")
-
-    }).catch((err) => {
-      console.log(err)
-      alert("Something went wrong")
-    })
+    HostelService.updateHostel(hostelDto)
+      .then((res) => {
+        navigate("/employee/hostel/display")
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   };
-
+  const cancel = () => {
+    navigate("/employee/hostel/display");
+  }
 
   return (
     <div className="row w-50 my-4 mx-5">
@@ -37,7 +40,6 @@ export default function UpdateHostel() {
             style={{ padding: "20px 50px 20px 50px" }}
             onSubmit={update}
           >
-
             <div className="row">
               <div className="col-lg-4">
                 <h6>Id</h6>
@@ -50,7 +52,6 @@ export default function UpdateHostel() {
                 </div>
               </div>
             </div>
-
             <div className="row">
               <div className="col-lg-4">
                 <h6>Name</h6>
@@ -73,7 +74,6 @@ export default function UpdateHostel() {
                 </div>
               </div>
             </div>
-
             <div className="row">
               <div className="col-lg-4">
                 <h6>Mobile number</h6>
@@ -89,7 +89,6 @@ export default function UpdateHostel() {
                 </div>
               </div>
             </div>
-
             <div className="row">
               <div className="col-lg-4">
                 <h6>Hostel Fees</h6>
@@ -104,8 +103,6 @@ export default function UpdateHostel() {
                 />
               </div>
             </div>
-
-
             <div className="row">
               <div className="col-lg-4">
                 <h6>Address</h6>
@@ -124,11 +121,9 @@ export default function UpdateHostel() {
                 </div>
               </div>
             </div>
-
             <div className="d-grid gap-2 col-6 mx-auto">
-              <button className="btn btn-primary w-100 mb-3" type="submit">
-                Update
-              </button>
+              <button className="btn btn-primary w-100 mb-3" type="submit">Update</button>
+              <button className="btn btn-danger w-100 mb-3" onClick={(e) => cancel()}>Cancel</button>
             </div>
           </form>
         </div>

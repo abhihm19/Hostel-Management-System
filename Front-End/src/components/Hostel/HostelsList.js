@@ -1,35 +1,24 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from 'react';
 import { Table, Space, Button } from 'antd';
-import Container from '../components/Container';
+import Container from '../Container';
 import { Link, useNavigate } from "react-router-dom";
-import { useEffect } from 'react';
-import HostelService from '../services/HostelService';
+import HostelService from '../../services/HostelService';
 
 
-export default function HostelView() {
+export default function HostelsList() {
 
     const [Hostels, setHostels] = useState([]);
-
-    function getHostelsData() {
-        axios
-            .get(`http://localhost:7777/admin/hostels/display`, {})
-            .then(response => response.data)
-            .then((data) => {
-                setHostels(data)
-            })
-            .catch((error) => {
-                console.log(error)
-            })
-
-    }
-
+    const navigate = useNavigate();
 
     useEffect(() => {
-        getHostelsData();
-    }, [])
-
-    let navigate = useNavigate();
+        HostelService.getHostelList()
+        .then((res) => {
+            setHostels(res.data)
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+    }, [])    
 
     if (Hostels && Hostels.length) {
         const columns = [
@@ -102,7 +91,7 @@ export default function HostelView() {
 
                         <Button onClick={(e) => {
                             //  console.log("column click", d)
-                            HostelService.deleteHostelDetail({ data: { id: (d.id) } })
+                            HostelService.deleteHostel({ data: { id: (d.id) } })
                                 .then((response) => {
                                     alert("hostel deleted:" + d.name)
                                     window.location.reload()

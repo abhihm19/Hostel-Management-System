@@ -60,39 +60,11 @@ public class AdminController {
 		this.userServiceImpl = userServiceImpl;
 		this.paymentServiceImpl = paymentServiceImpl;
 	}
-
+	
 	@GetMapping("/students/display")
     public ResponseEntity<List<StudentDto>> getAllUsers() {
     	return ResponseEntity.ok().body(studentServiceImpl.displayStudents()); 
-    }
-	
-	@PostMapping("/hostel/add")
-    public ResponseEntity<?> addHostel(@RequestBody HostelDto hostelDto) {
-		hostelServiceImpl.addHostel(hostelDto);
-    	return ResponseEntity.ok().body(new ApiResponse(true, "Hostel added successfully")); 
-    }
-	
-	@PutMapping("/hostel/update")
-    public ResponseEntity<?> updateHostel(@RequestBody HostelDto hostelDto) throws Exception {
-		hostelServiceImpl.updateHostel(hostelDto);
-    	return ResponseEntity.ok().body(new ApiResponse(true, "Hostel updated successfully")); 
-    }
-	
-	@GetMapping("/hostels/display")
-    public ResponseEntity<List<HostelDto>> displayHostels() {		
-    	return ResponseEntity.ok().body(hostelServiceImpl.displayHostels()); 
-    }
-	
-	@GetMapping("/hostel/view")
-    public ResponseEntity<HostelDto> viewHostel(@RequestParam long id) {		
-    	return ResponseEntity.ok().body(hostelServiceImpl.viewHostel(id)); 
-    }
-	
-	@DeleteMapping("/hostel/delete")
-    public ResponseEntity<?> deleteHostel(@RequestBody HostelDto hostelDto) {
-		hostelServiceImpl.deleteHostel(hostelDto);
-    	return ResponseEntity.ok().body(new ApiResponse(true, "Hostel deleted successfully")); 
-    }
+    }	
 	
 	@PostMapping("/room/add")
     public ResponseEntity<?> addRoom(@RequestBody RoomDto roomDto) throws Exception {

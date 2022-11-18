@@ -9,7 +9,7 @@ const SideStudentNavBar = () => {
 
     return (
 
-        <div>
+        <div style={{position: ""}}>
             <div
                 className={`bg-zinc-900 h-screen p-2 pt-3  ${open ? "w-64" : "w-16"
                     } duration-500 relative`}

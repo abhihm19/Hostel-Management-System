@@ -1,33 +1,36 @@
 import axios from 'axios';
 
-const STUDENT_API_BASE_URL = "http://localHost:7777/admin"
+const API_BASE_URL = "http://localHost:7777/admin/hostel/";
 
-axios.interceptors.request.use( config => {
-    let token1 = sessionStorage.getItem("jwt")
-  
-    if(token1){
-      const token = 'Bearer ' + token1;
-      config.headers.Authorization =  token;
-    }
-  
-    return config;
-  });
+axios.interceptors.request.use(config => {
+  let token1 = sessionStorage.getItem("jwt")
+
+  if (token1) {
+    const token = 'Bearer ' + token1;
+    config.headers.Authorization = token;
+  }
+
+  return config;
+});
 
 class HostelService {
-  
-    
-    adddetail(hosteldetail){
-        return axios.post(STUDENT_API_BASE_URL + "/hostel/add" , hosteldetail);
-    }
 
-    updatedetail(hosteldetail){
-        return axios.put(STUDENT_API_BASE_URL + "/hostel/update", hosteldetail)
-    }
-    
+  getHostelList() {
+    return axios.get(API_BASE_URL + "list");
 
-     deleteHostelDetail(hosteldetail){
-        return axios.delete(STUDENT_API_BASE_URL + "/hostel/delete", hosteldetail)
-    }
+  }
+
+  addHostel(hostelDto) {
+    return axios.post(API_BASE_URL, hostelDto);
+  }
+
+  updateHostel(hostelDto) {
+    return axios.put(API_BASE_URL, hostelDto);
+  }
+
+  deleteHostel(hostelDto) {
+    return axios.delete(API_BASE_URL, hostelDto);
+  }
 
 }
 

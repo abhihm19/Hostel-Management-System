@@ -15,33 +15,36 @@ export default function Login() {
 
     console.log(userlogin)
 
-    AuthService.signin(userlogin).then(response => {
-      console.log(response.data)
-      sessionStorage.setItem("jwt", response.data.jwtToken)
-      sessionStorage.setItem("authenticated", true)
-      console.log(response.data.roles[0])
-      sessionStorage.setItem("role", response.data.roles[0])
+    AuthService.signin(userlogin)
+      .then(response => {
+        console.log(response.data)
+        sessionStorage.setItem("jwt", response.data.jwtToken)
+        sessionStorage.setItem("authenticated", true)
+        console.log(response.data.roles[0])
+        sessionStorage.setItem("role", response.data.roles[0])
 
-      let role = response.data.roles[0]
+        let role = response.data.roles[0]
 
-      if (role === 'ROLE_STUDENT') {
-        navigate('/student')
-        window.location.reload()
-      }
-      else if (role === 'ROLE_ADMIN') {
-        navigate('/employee')
-        window.location.reload()
-      }
+        if (role === 'ROLE_STUDENT') {
+          navigate('/student')
+          window.location.reload()
+        }
+        else if (role === 'ROLE_ADMIN') {
+          navigate('/employee')
+          window.location.reload()
+        }
 
-    }).catch((err) => {
-      console.log(err)
-      alert("Invalid Username or Password")
-    })
+      })
+      .catch((err) => {
+        console.log(err)
+        alert("Invalid Username or Password")
+      })
   };
 
   const isEnabled = () => {
-    const { userid, password } = this.state;
-    return (userid.length > 0 && password.length > 0);
+    const { userName, password } = this.state;
+    console.log(userName.length > 0 && password.length > 0)
+    return (userName.length > 0 && password.length > 0);
 
   }
 
@@ -58,9 +61,9 @@ export default function Login() {
           <form onSubmit={handleSubmit} >
             <div className="input-group mb-3 mt-4">
               <span className="input-group-text"><FaUserAlt /></span>
-              <label htmlFor="userId" className="sr-only"></label>
+              <label htmlFor="userName" className="sr-only"></label>
               <input type="text" className="form-control"
-                placeholder="Enter User ID"
+                placeholder="Enter Username"
                 name="userName"
               ></input>
             </div>

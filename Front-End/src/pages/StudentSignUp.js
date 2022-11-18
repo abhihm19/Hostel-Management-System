@@ -78,7 +78,6 @@ export default function StudentSignUp() {
           <div className="font-weight-bold mt-3 mb-4">
             <p className="font-weight-bold">
               <strong>Already registered? &nbsp;</strong>
-              {/* <a href='/student/signup' className="text-primary">Register</a> */}
               <Link to='/login'>Sign in</Link>
             </p>
           </div>

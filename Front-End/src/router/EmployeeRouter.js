@@ -3,13 +3,13 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import StudentsList from '../pages/StudentsList';
 import EmployeeDashboard from '../pages/EmployeeDashboard';
-import HostelView from '../pages/HostelView';
+import HostelsList from '../components/Hostel/HostelsList';
 import ConcernsList from '../pages/ConcernsList';
 import EmployeeProfile from '../pages/EmployeeProfile';
 import SharedEmployeeLayout from '../pages/SharedEmployeeLayout';
-import AddHostel from '../pages/AddHostel';
+import AddHostel from '../components/Hostel/AddHostel';
 import AddRooms from '../pages/AddRooms';
-import UpdateHostel from '../pages/UpdateHostel';
+import UpdateHostel from '../components/Hostel/UpdateHostel';
 import UpdateRoom from '../pages/UpdateRoom';
 import RoomView from '../pages/RoomView';
 import EmployeeUpdate from '../pages/EmployeeUpdate';
@@ -32,7 +32,7 @@ class EmployeeRouter extends Component {
                                 <Route path='room/update' element={<UpdateRoom />}></Route>
                                 <Route path="concern/display" element={<ConcernsList />} />
                                 <Route path="profile" element={<EmployeeProfile />} />
-                                <Route path="hostel/display" element={<HostelView />} />
+                                <Route path="hostel/display" element={<HostelsList />} />
                                 <Route path="hostel/room" element={<RoomView />} />
                                 <Route path="hostel/update" element={<UpdateHostel />} />
                                 <Route path="update" element={<EmployeeUpdate />} />

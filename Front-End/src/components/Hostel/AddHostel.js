@@ -1,39 +1,38 @@
 import React from "react";
-import HostelService from "../services/HostelService";
+import { useNavigate } from "react-router-dom";
+import HostelService from "../../services/HostelService";
 
 export default function AddHostel() {
+
+  const navigate = useNavigate();
   const handlesubmit = (e) => {
     e.preventDefault();
 
     const formData = new FormData(e.target);
-    const hosteldetail = Object.fromEntries(formData);
+    const hostelDto = Object.fromEntries(formData);
 
-    HostelService.adddetail(hosteldetail)
-      .then((response) => {
-        if (response.data) {
-          console.log(" details added :" + response);
-          alert(" details added");
-        } else alert("ID already exists");
+    HostelService.addHostel(hostelDto)
+      .then((res) => {
+        navigate("/employee/hostel/display");
       })
       .catch((err) => {
         console.log(err);
-        alert("Something went wrong");
       });
   };
-  
+  const cancel = () => {
+    navigate("/employee/hostel/display");
+  }
 
   return (
     <div className="row w-50 my-4 mx-5">
       <div className="col-lg-12 col-xl-12">
         <div className="card">
-          <h5 className="card-header text-center">Add Hostel</h5>
+          <h5 className="card-header text-center" style={{ backgroundColor: "rgb(43, 43, 43)", color: "white"}}>Add Hostel</h5>
           <form
             className="card-body"
             style={{ padding: "20px 50px 20px 50px" }}
             onSubmit={handlesubmit}
           >
-          
-
             <div className="row">
               <div className="col-lg-4">
                 <h6>Name</h6>
@@ -44,8 +43,6 @@ export default function AddHostel() {
                 </div>
               </div>
             </div>
-           
-
             <div className="row">
               <div className="col-lg-4">
                 <h6>Contact Person</h6>
@@ -60,7 +57,6 @@ export default function AddHostel() {
                 </div>
               </div>
             </div>
-
             <div className="row">
               <div className="col-lg-4">
                 <h6>Hostel Fees</h6>
@@ -87,7 +83,6 @@ export default function AddHostel() {
                 />
               </div>
             </div>
-
             <div className="row">
               <div className="col-lg-4">
                 <h6>Address</h6>
@@ -105,11 +100,9 @@ export default function AddHostel() {
                 </div>
               </div>
             </div>
-
             <div className="d-grid gap-2 col-6 mx-auto">
-              <button className="btn btn-primary w-100 mb-3" type="submit">
-                Submit
-              </button>
+              <button className="btn btn-primary w-100 mb-3" type="submit">Submit</button>
+              <button className="btn btn-danger w-100 mb-3" onClick={(e) => cancel()}>Cancel</button>
             </div>
           </form>
         </div>
