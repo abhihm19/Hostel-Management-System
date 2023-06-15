@@ -3,10 +3,6 @@ package in.cdac.hms.model;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
@@ -23,22 +19,18 @@ import lombok.Setter;
 @AllArgsConstructor
 @Entity
 @Table(name = "rooms")
-public class Room {
+public class Room extends Base {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
 	@Column(unique = true)
-	private int roomNo;
+	private Integer roomNo;
 	
-	private byte isVacant = 1;
+	@Column(name = "is_vacant")
+	private Boolean isVacant;
 	
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "hostel_id", referencedColumnName ="id" )
 	private Hostel hostel;
 	
-	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "room")
+	@OneToOne
 	private Student student;
-	
-
 }

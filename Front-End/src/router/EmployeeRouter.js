@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import StudentsList from '../pages/StudentsList';
-import EmployeeDashboard from '../pages/EmployeeDashboard';
+import StudentsList from '../components/Student/StudentsList';
+import EmployeeDashboard from '../components/Employee/EmployeeDashboard';
 import HostelsList from '../components/Hostel/HostelsList';
-import ConcernsList from '../pages/ConcernsList';
-import EmployeeProfile from '../pages/EmployeeProfile';
-import SharedEmployeeLayout from '../pages/SharedEmployeeLayout';
+import ConcernsList from '../components/Concern/ConcernsList';
+import EmployeeProfile from '../components/Employee/EmployeeProfile';
+import SharedEmployeeLayout from '../components/Employee/SharedEmployeeLayout';
 import AddHostel from '../components/Hostel/AddHostel';
-import AddRooms from '../pages/AddRooms';
+import AddRooms from '../components/Room/AddRooms';
 import UpdateHostel from '../components/Hostel/UpdateHostel';
-import UpdateRoom from '../pages/UpdateRoom';
-import RoomView from '../pages/RoomView';
-import EmployeeUpdate from '../pages/EmployeeUpdate';
-import PaymentList from '../pages/PaymentList';
-import Logout from '../pages/Logout';
+import UpdateRoom from '../components/Room/UpdateRoom';
+import RoomListForAdmin from '../components/Room/RoomListForAdmin';
+import EmployeeUpdate from '../components/Employee/EmployeeUpdate';
+import PaymentList from '../components/Payment/PaymentList';
+import Logout from '../components/Home/Logout';
 
 
 class EmployeeRouter extends Component {
@@ -28,12 +28,12 @@ class EmployeeRouter extends Component {
                                 <Route index element={<EmployeeDashboard />} />
                                 <Route path="student/display" element={<StudentsList />} />
                                 <Route path="hostel/display/add" element={<AddHostel />} />
-                                <Route path='hostel/room/add' element={<AddRooms />}></Route>
-                                <Route path='room/update' element={<UpdateRoom />}></Route>
+                                <Route path='hostel/room/add' element={<AddRooms />} />
+                                <Route path='room/update' element={<UpdateRoom />} />
                                 <Route path="concern/display" element={<ConcernsList />} />
                                 <Route path="profile" element={<EmployeeProfile />} />
                                 <Route path="hostel/display" element={<HostelsList />} />
-                                <Route path="hostel/room" element={<RoomView />} />
+                                <Route path="hostel/room" element={<RoomListForAdmin />} />
                                 <Route path="hostel/update" element={<UpdateHostel />} />
                                 <Route path="update" element={<EmployeeUpdate />} />
                                 <Route path="payments" element={<PaymentList />} />
@@ -43,11 +43,7 @@ class EmployeeRouter extends Component {
                     </Router>
 
                 </div>
-            );
-        
-
-        
-        
+            );        
     }
 }
 

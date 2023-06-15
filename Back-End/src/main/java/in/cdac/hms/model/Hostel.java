@@ -3,12 +3,8 @@ package in.cdac.hms.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -23,10 +19,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Entity
 @Table(name = "hostels")
-public class Hostel {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+public class Hostel extends Base {
 	
 	@Column(unique = true, nullable = false)
 	private String name;	
@@ -35,14 +28,13 @@ public class Hostel {
 	private String contactPerson;
 	
 	@Column(name = "contact_mobile_no")
-	private long contactMobileNo;	
+	private String contactMobileNo;	
 	
 	private String address;
 	
 	@Column(name = "hostel_fees")	
-	private int hostelFees;
+	private Integer hostelFees;
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "hostel")
+	@OneToMany
 	private List<Room> rooms = new ArrayList<>();
-
 }

@@ -12,30 +12,28 @@ import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import lombok.RequiredArgsConstructor;
+
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfiguration {
 	
-	
     private JwtFilter jwtFilter;    
-	
-	public SecurityConfiguration(JwtFilter jwtFilter) {		
-		this.jwtFilter = jwtFilter;
-	}
-	
+
 	@Bean
-	public static PasswordEncoder passwordEncoder() {
+	PasswordEncoder passwordEncoder() {
 		return new Pbkdf2PasswordEncoder();
 	}
 	
 	@Bean
-    public AuthenticationManager authenticationManager(
+    AuthenticationManager authenticationManager(
             AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
 
 	@Bean
-	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http
 		.cors().and()
 		.csrf().disable()
@@ -55,8 +53,7 @@ public class SecurityConfiguration {
 		http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 		
 		return http.build();
-	}		
-
+	}
 }
 		
 	  

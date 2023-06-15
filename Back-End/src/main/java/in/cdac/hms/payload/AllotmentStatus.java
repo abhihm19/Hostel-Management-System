@@ -14,7 +14,7 @@ public class AllotmentStatus {
 	private String hostelName;
 	private String hostelAddress;
 	private String contactPerson;
-	private long contactPhone;
-	private String allotmentStatus;
-	private String paymentStatus;
+	private String contactPhone;
+	private boolean allotmentStatus;
+	private boolean paymentStatus;
 }

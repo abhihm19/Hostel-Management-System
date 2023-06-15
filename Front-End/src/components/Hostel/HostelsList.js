@@ -13,7 +13,8 @@ export default function HostelsList() {
     useEffect(() => {
         HostelService.getHostelList()
         .then((res) => {
-            setHostels(res.data)
+            console.log(res.data)
+            setHostels(res.data.content)
         })
         .catch((err) => {
             console.log(err)
@@ -107,7 +108,7 @@ export default function HostelsList() {
         return (
             <Container>
                 <h3 className='text-center m-2 p-2'>Hostels List</h3>
-                <Link to='add' className='btn btn-success mb-3'>Add Hostel</Link>
+                <Link to='add' className='btn btn-primary mb-3'>Add Hostel</Link>
                 <Table
                     dataSource={Hostels}
                     columns={columns}

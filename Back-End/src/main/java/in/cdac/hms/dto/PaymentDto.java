@@ -1,6 +1,6 @@
 package in.cdac.hms.dto;
 
-import java.sql.Date;
+import java.time.LocalDateTime;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,11 +12,11 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PaymentDto {		
-	private long id;
+	private int id;
 	private String transactionId;
 	private String studentName;
 	private String hostelName;
 	private int roomNo;
-	private String transactionStatus;
-	private Date transactionDate;	
+	private boolean transactionStatus;
+	private LocalDateTime transactionDate;	
 }

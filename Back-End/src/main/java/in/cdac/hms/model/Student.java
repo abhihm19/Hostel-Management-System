@@ -1,14 +1,9 @@
 package in.cdac.hms.model;
 
-import java.sql.Date;
+import java.time.LocalDateTime;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -25,35 +20,33 @@ import lombok.Setter;
 @AllArgsConstructor
 @Entity
 @Table(name = "students")
-public class Student {
-	
-	@Id	
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long id;	
-	
-	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "user_id")
-	private User user;
-	
+public class Student extends Base {
+
 	@Column(name = "email_id", unique = true)
 	private String emailId;
 	
 	@Column(name = "mobile_no", unique = true)
-	private Long mobileNo;	
+	private String mobileNo;	
+	
+	private String degree;
 	
 	private String course;
 	
+	@Column(name = "academic_year")
+	private String academicYear;
+	
 	@Column(name = "date_of_birth")	
-	private Date dateOfBirth;
+	private LocalDateTime dateOfBirth;
 	
 	private String gender;
 	
-	private String address;		
+	private String address;	
 	
-	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+	
+	@OneToOne
 	@JoinColumn(name = "room_id")
 	private Room room;
-	
-//	@OneToOne(cascade = CascadeType.ALL, mappedBy = "student")
-//	private Payment payment;
 }

@@ -10,9 +10,9 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RoomDto {	
-	private long id;
-	private long hostelId;
+	private int id;
+	private int hostelId;
 	private String hostelName;
 	private int roomNo;
-	private String isVacant;	
+	private boolean isVacant;	
 }

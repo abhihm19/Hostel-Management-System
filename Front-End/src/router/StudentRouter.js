@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import StudentDashboard from '../pages/StudentDashboard';
-import StudentRegister from '../pages/StudentRegister';
-import StudentProfile from '../pages/StudentProfile';
-import SharedStudentLayout from '../pages/SharedStudentLayout';
-import SelectHostel from '../pages/SelectHostel';
-import SelectRoom from '../pages/SelectRoom';
-import Payments from '../pages/Payments';
-import AllotmentStatus from '../pages/AllotmentStatus';
-import ReportConcern from '../pages/ReportConcern';
-import StudentUpdate from '../pages/StudentUpdate';
-import Logout from '../pages/Logout';
-import RoomStatus from '../pages/RoomStatus';
+import StudentDashboard from '../components/Student/StudentDashboard';
+import StudentRegister from '../components/Student/StudentRegister';
+import StudentProfile from '../components/Student/StudentProfile';
+import SharedStudentLayout from '../components/Student/SharedStudentLayout';
+import HostelsList from '../components/Hostel/SelectHostel';
+import RoomListForStudents from '../components/Room/RoomListForStudents';
+import Payments from '../components/Payment/PaymentList';
+import AllotmentStatus from '../components/Room/AllotmentStatus';
+import AddConcern from '../components/Concern/AddConcern';
+import StudentUpdate from '../components/Student/StudentUpdate';
+import Logout from '../components/Home/Logout';
+import RoomStatus from '../components/Room/RoomStatus';
 
 
 class StudentRouter extends Component {
@@ -21,26 +21,23 @@ class StudentRouter extends Component {
         return (
             <div>
                 <Router>
-                    <Routes>
-                        
+                    <Routes>                        
                         <Route exact path="student" element={<SharedStudentLayout />}>
                             <Route index element={<StudentDashboard />} />
                             <Route path="register" element={<StudentRegister />} />
-                            <Route path="hostel" element={<SelectHostel />} />
-                            <Route path="hostel/room" element={<SelectRoom />} />
+                            <Route path="hostel" element={<HostelsList />} />
+                            <Route path="hostel/room" element={<RoomListForStudents />} />
                             <Route path="payment" element={<Payments />} />
                             <Route path="status" element={<AllotmentStatus />} />
-                            <Route path="concern" element={<ReportConcern />} />
+                            <Route path="concern" element={<AddConcern />} />
                             <Route path="profile" element={<StudentProfile />} />
                             <Route path="update" element={<StudentUpdate />} />
                             <Route path="roomstatus" element={<RoomStatus />} />
                             <Route path="logout" element={<Logout />} />
-                        </Route>
-    
-    
+                        </Route>    
                     </Routes>
                 </Router>
-            </div >
+            </div>
         );
     }
 }

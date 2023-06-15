@@ -1,10 +1,19 @@
 import axios from 'axios';
 
-const ADMIN_BASE_URL = "http://localhost:7777/admin/";
+const BASE_URL = "http://localhost:7777/concern";
+
 class ConcernService {
 
-    getConcerns(){
-        return axios.get(ADMIN_BASE_URL + "concerns/display");
+    addConcern(concernDto) {
+        return axios.post(BASE_URL, concernDto);
+    }
+
+    getAllConcernsForSingleUser(){
+        return axios.get(BASE_URL + "/get-all-concerns-for-single-user");
+    }
+    
+    getAllConcerns() {
+        return axios.get(BASE_URL + "/get-all-concerns");
     }
 }
 

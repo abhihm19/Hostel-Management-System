@@ -1,31 +1,24 @@
 import axios from 'axios';
 
-const STUDENT_API_BASE_URL = "http://localHost:7777/admin"
-
-axios.interceptors.request.use( config => {
-    let token1 = sessionStorage.getItem("jwt")
-  
-    if(token1){
-      const token = 'Bearer ' + token1;
-      config.headers.Authorization =  token;
-    }
-  
-    return config;
-  });
+const BASE_URL = "http://localHost:7777/room"
 
 class RoomService {
   
-    
-    adddetail(roomdetail){
-        return axios.post(STUDENT_API_BASE_URL + "/room/add" , roomdetail);
-    }
-    updatedetail(roomdetail){
-        return axios.put(STUDENT_API_BASE_URL + "/room/update", roomdetail)
-    }
-    deleteRoomDetail(roomdetail){
-        return axios.delete(STUDENT_API_BASE_URL + "/room/delete", roomdetail)
+    addRoom(roomDto){
+        return axios.post(BASE_URL, roomDto);
     }
 
+    updateRoom(roomDto, roomId){
+        return axios.put(BASE_URL, roomDto, roomId);
+    }
+
+    displayRooms(hostelId){
+        return axios.get(BASE_URL + "/", hostelId);
+    }
+    
+    deleteRoomDetail(roomDto){
+        return axios.delete(BASE_URL, roomDto);
+    }
 }
 
 export default new RoomService();

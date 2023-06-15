@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import Error from '../pages/Error';
+import Error from '../components/Home/Error';
 
 class ErrorRouter extends Component {
     render() {

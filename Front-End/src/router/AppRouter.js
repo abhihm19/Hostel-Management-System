@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import SharedHomeLayout from '../pages/SharedHomeLayout';
-import Home from '../pages/Home';
-import Login from '../pages/Login';
-import StudentSignUp from '../pages/StudentSignUp';
+import SharedHomeLayout from '../components/Home/SharedHomeLayout';
+import Home from '../components/Home/Home/Home';
+import Login from '../components/Home/Login/Login';
+import StudentSignUp from '../components/Home/StudentSignUp';
 
 class AppRouter extends Component {
     render() {

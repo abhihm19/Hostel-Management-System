@@ -1,9 +1,9 @@
 package in.cdac.hms.service;
 
 import in.cdac.hms.dto.AdminDto;
+import in.cdac.hms.payload.ApiResponse;
 
 public interface IAdminService {	
 	AdminDto viewAdmin();
-	void updateAdmin(AdminDto adminDto);
-	public void addAdmin(AdminDto adminDto);
+	ApiResponse updateAdmin(AdminDto adminDto);
 }

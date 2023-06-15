@@ -1,12 +1,14 @@
 package in.cdac.hms.service;
 
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import in.cdac.hms.dto.RoomDto;
+import in.cdac.hms.payload.ApiResponse;
 
 public interface IRoomService {	
-	void addRoomToHostel(RoomDto roomDto) throws Exception;
-	List<RoomDto> displayRooms(long hostelId);
-	void updateRoom(RoomDto roomDto);
-	void deleteRoom(RoomDto roomDto);
+	ApiResponse addRoomToHostel(RoomDto roomDto, int hostelId) throws Exception;
+	Page<RoomDto> displayRooms(Pageable pageable, int hostelId);
+	ApiResponse updateRoom(RoomDto roomDto, int roomId);
+	ApiResponse deleteRoom(int roomId);
 }

@@ -1,9 +1,10 @@
 package in.cdac.hms.service;
 
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import in.cdac.hms.dto.PaymentDto;
 
 public interface IPaymentService {
-	List<PaymentDto> getTransactions();
+	Page<PaymentDto> getTransactions(Pageable pageable);
 }

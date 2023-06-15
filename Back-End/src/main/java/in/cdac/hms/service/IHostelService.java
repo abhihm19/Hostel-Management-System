@@ -1,13 +1,14 @@
 package in.cdac.hms.service;
 
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import in.cdac.hms.dto.HostelDto;
+import in.cdac.hms.payload.ApiResponse;
 
 public interface IHostelService {	
-	void addHostel(HostelDto hostelDto);
-	void updateHostel(HostelDto hostelDto) throws Exception;
-	List<HostelDto> displayHostels();
-	HostelDto viewHostel(long id);
-	void deleteHostel(HostelDto hostelDto);
+	ApiResponse addHostel(HostelDto hostelDto);
+	ApiResponse updateHostel(HostelDto hostelDto, int hostelId);
+	HostelDto viewHostel(int hostelId);
+	Page<HostelDto> getAllHostels(Pageable pageable);
 }

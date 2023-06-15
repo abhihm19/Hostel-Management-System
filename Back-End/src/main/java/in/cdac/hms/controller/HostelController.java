@@ -1,59 +1,50 @@
 package in.cdac.hms.controller;
 
-import java.util.List;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import in.cdac.hms.dto.HostelDto;
 import in.cdac.hms.payload.ApiResponse;
-import in.cdac.hms.service.HostelServiceImpl;
+import in.cdac.hms.service.IHostelService;
+import lombok.RequiredArgsConstructor;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
-@RequestMapping(value="/admin/hostel")
+@RequestMapping(value="/hostel")
+@RequiredArgsConstructor
 public class HostelController {
 	
-	private HostelServiceImpl hostelServiceImpl;
-	
-	public HostelController(HostelServiceImpl hostelServiceImpl) {
-		this.hostelServiceImpl = hostelServiceImpl;
-	}
-	
-	@PostMapping("/")
-    public ResponseEntity<?> addHostel(@RequestBody HostelDto hostelDto) {
-		hostelServiceImpl.addHostel(hostelDto);
-    	return ResponseEntity.ok().body(new ApiResponse(true, "Hostel added successfully")); 
-    }
-	
-	@PutMapping("/")
-    public ResponseEntity<?> updateHostel(@RequestBody HostelDto hostelDto) throws Exception {
-		hostelServiceImpl.updateHostel(hostelDto);
-    	return ResponseEntity.ok().body(new ApiResponse(true, "Hostel updated successfully")); 
-    }
-	
-	@GetMapping("/list")
-    public ResponseEntity<List<HostelDto>> displayHostels() {		
-    	return ResponseEntity.ok().body(hostelServiceImpl.displayHostels()); 
-    }
-	
-	@GetMapping("/")
-    public ResponseEntity<HostelDto> viewHostel(@RequestParam long id) {		
-    	return ResponseEntity.ok().body(hostelServiceImpl.viewHostel(id)); 
-    }
-	
-	@DeleteMapping("/")
-    public ResponseEntity<?> deleteHostel(@RequestBody HostelDto hostelDto) {
-		hostelServiceImpl.deleteHostel(hostelDto);
-    	return ResponseEntity.ok().body(new ApiResponse(true, "Hostel deleted successfully")); 
-    }
+	private IHostelService hostelService;
 
+	@PreAuthorize("hasRole('ADMIN')")
+	@PostMapping
+    public ResponseEntity<ApiResponse> addHostel(@RequestBody HostelDto hostelDto) {
+    	return ResponseEntity.ok().body(hostelService.addHostel(hostelDto)); 
+    }
+	
+	@PreAuthorize("hasRole('ADMIN')")
+	@PutMapping("/{id}")
+    public ResponseEntity<ApiResponse> updateHostel(@RequestBody HostelDto hostelDto, @PathVariable int id) throws Exception {
+    	return ResponseEntity.ok().body(hostelService.updateHostel(hostelDto, id)); 
+    }
+	
+	@GetMapping("/{id}")
+    public ResponseEntity<HostelDto> viewHostel(@PathVariable int id) {		
+    	return ResponseEntity.ok().body(hostelService.viewHostel(id)); 
+    }
+	
+	@GetMapping("/get-all-hostels")
+    public ResponseEntity<Page<HostelDto>> getAllHostels(Pageable pageable) {		
+    	return ResponseEntity.ok().body(hostelService.getAllHostels(pageable)); 
+    }	
 }

@@ -1,12 +1,7 @@
 package in.cdac.hms.model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -22,15 +17,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Entity
 @Table(name = "admins")
-public class Admin {
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	
-	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "user_id")
-	private User user;
+public class Admin extends Base {
 	
 	private String department;
 	
@@ -41,9 +28,11 @@ public class Admin {
 	private String emailId;
 	
 	@Column(name = "mobile_no")
-	private long mobileNo;	
+	private String mobileNo;	
 	
-	private String designation;
+	private String designation;	
 	
-	
+	@OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 }

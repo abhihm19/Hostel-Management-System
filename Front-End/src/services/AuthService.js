@@ -1,28 +1,35 @@
 import axios from "axios";
 
+const BASE_URL = "http://localHost:7777";
+
+axios.interceptors.request.use(config => {
+  let jwtToken = sessionStorage.getItem("jwt")
+
+  if (jwtToken) {
+    const token = 'Bearer ' + jwtToken;
+    config.headers.Authorization = token;
+  }
+
+  return config;
+});
+
 class AuthService {
 
-  signin(userlogin){
-    console.log(userlogin);
-    return axios.post('http://localhost:7777/signin', userlogin );
-}
+  signin(loginRequest) {
+    return axios.post(BASE_URL + "/signin", loginRequest);
+  }
 
-  // logout() {
-  //   //alert("Sucessfully Logout");
-  //   localStorage.clear();
-  //   sessionStorage.clear();
-  //   this.props.history.push("/");
-  // }
+  signup(signUpRequest) {
+    return axios.post(BASE_URL + "/signup", signUpRequest);
+  }
 
-
-  signup(studentdetail){    
-    return axios.post('http://localhost:7777/signup', studentdetail );
-}
+  getuser() {
+    return axios.get(BASE_URL);
+  }
 
   getCurrentUser() {
-    return JSON.parse(localStorage.getItem('user'));;
+    return JSON.parse(localStorage.getItem('user'));
   }
 }
 
 export default new AuthService();
-
